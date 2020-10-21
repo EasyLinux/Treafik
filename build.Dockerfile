@@ -1,7 +1,9 @@
-FROM golang:1.15-alpine
+FROM alpine:3.12
+
+RUN apk add go
 
 RUN apk --update upgrade \
-    && apk --no-cache --no-progress add git mercurial bash gcc musl-dev curl tar ca-certificates tzdata \
+    && apk --no-cache add git mercurial bash gcc musl-dev curl tar ca-certificates tzdata \
     && update-ca-certificates \
     && rm -rf /var/cache/apk/*
 
@@ -9,9 +11,7 @@ RUN apk --update upgrade \
 ARG DOCKER_VERSION=18.09.7
 
 # Download docker
-RUN mkdir -p /usr/local/bin \
-    && curl -fL https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
-    | tar -xzC /usr/local/bin --transform 's#^.+/##x'
+RUN apk add docker-cli
 
 # Download go-bindata binary to bin folder in $GOPATH
 RUN mkdir -p /usr/local/bin \

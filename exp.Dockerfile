@@ -1,5 +1,7 @@
 # WEBUI
-FROM node:12.11 as webui
+FROM alpine:3.12 as webui
+
+RUN apk add nodejs npm
 
 ENV WEBUI_DIR /src/webui
 RUN mkdir -p $WEBUI_DIR
