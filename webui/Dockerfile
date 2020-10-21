@@ -1,4 +1,6 @@
-FROM node:12.18
+FROM alpine:3.12
+
+RUN apk add nodejs npm python2 build-base
 
 ENV WEBUI_DIR /src/webui
 ARG ARG_PLATFORM_URL=https://pilot.traefik.io
